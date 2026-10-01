@@ -26,30 +26,24 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    try {
-                        echo "Build ${APP_NAME} version ${APP_VERSION}"
+stage('Build') {
+    steps {
+        script {
+            try {
+                echo "Build started"
 
-                        sh '''
-                            echo "Build started"
-                            sleep 2
-                            echo "Build completed"
-                        '''
+                sh 'exit 1'
 
-                        env.BUILD_OK = 'true'
-
-                    } catch (Exception e) {
-                        env.BUILD_OK = 'false'
-                        echo "Build error: ${e}"
-                        currentBuild.result = 'FAILURE'
-                        error('Build failed')
-                    }
-                }
+                env.BUILD_OK = 'true'
+            } catch (Exception e) {
+                env.BUILD_OK = 'false'
+                echo "Build error: ${e}"
+                currentBuild.result = 'FAILURE'
+                error('Build failed')
             }
         }
-
+    }
+}
         stage('Test') {
             when {
                 expression {
