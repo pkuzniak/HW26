@@ -32,7 +32,7 @@ stage('Build') {
             try {
                 echo "Build started"
 
-                sh 'exit 1'
+               
 
                 env.BUILD_OK = 'true'
             } catch (Exception e) {
